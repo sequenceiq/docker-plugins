@@ -1,4 +1,4 @@
-DEFAULT_MSG_FIELDS=".Name,.Config.Image,.Config.Hostname"
+DEFAULT_MSG_FIELDS=".Name,.Config.Image,.NetworkSettings.IPAddress"
 
 get_jq_filter() {
   local fields_filter="\"Container: \" + \$event "

@@ -41,25 +41,25 @@ docker run -it --rm \
 It will send messages like this:
 
 ```
-Container: exists Name=/agitated_brown Image=progrium/plugins Hostname=1dd9490cba2b
-Container: create Name=/webserver Image=nginx Hostname=8f88d1bcf446
-Container: start Name=/webserver Image=nginx Hostname=8f88d1bcf446
+Container: exists Name=/agitated_brown Image=progrium/plugins IPAddress=172.17.0.13
+Container: create Name=/webserver Image=nginx IPAddress=172.17.0.4
+Container: start Name=/webserver Image=nginx IPAddress=172.17.0.4
 ```
 
 ## Message format
 
 Right now the message starts with the name of the event, than a minimal
-information is displayed about the container: name, image, hostname.
+information is displayed about the container: name, image, ip.
 
-The message is created with the Docker container JSON piped into [jq](http://stedolan.github.io/jq/). The jq filter starts with the hook name,
-and then contains the following fields:
+The message is created with the Docker container JSON piped into [jq](http://stedolan.github.io/jq/). 
+The jq filter starts with the hook name, and then contains the following fields:
 
 - .Name  
 - .Config.Image
-- .Config.Hostnamename
+- .NetworkSettings.IPAddress
 
 It can be customized via the `HIPCHAT_MSG_FIELDS` environment var. Its a coma
-sparated list of JSON fields. For example to include the **IpAddress**
+sparated list of JSON fields. For example to include the **Path** of the running process
 
 ```
 docker run -it --rm \
@@ -67,15 +67,14 @@ docker run -it --rm \
   -e "ENABLE=hipchat" \
   -e "HIPCHAT_TOKEN=$HIPCHAT_TOKEN" \
   -e "HIPCHAT_ROOM_ID=$HIPCHAT_ROOM_ID" \
-  -e "HIPCHAT_MSG_FIELDS=.Config.Image,.NetworkSettings.IPAddress,.Name" \
-  -v $(pwd):/plugins/available/hipchat \
+  -e "HIPCHAT_MSG_FIELDS=.Name,.Config.Image,.NetworkSettings.IPAddress,.Path" \
   -v /var/run/docker.sock:/var/run/docker.sock \
   progrium/plugins
 ```
 
 It will generate a similar hipchat message:
 ```
-Container: exists Image=progrium/plugins IPAddress=172.19.0.51 Name=/agitated_brown
+Container: exists Name=/cadvisor Image=google/cadvisor:latest IPAddress=172.19.0.4 Path=/usr/bin/cadvisor
 ```
 
 ## Unit testing the jq filter
