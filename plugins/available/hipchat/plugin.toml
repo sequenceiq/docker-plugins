@@ -4,7 +4,7 @@ description = "Sends HipChat notifications"
 version = "1.0"
 maintainer_name = "Lajos Papp"
 maintainer_email = "lajos.papp@sequenceiq.com"
-website_url = "http://github.com/lalyos/docker-plugin-hipchat"
+website_url = "https://github.com/progrium/docker-plugins"
 
 [plugin.config]
 room_id = "6 digit API id of the room"

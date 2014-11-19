@@ -1,5 +1,5 @@
-This is a [docker-plugin](https://github.com/progrium/docker-plugins) aims
-to send HipChat messages to a specific room at each docker event: start/stop/create/destroy ...
+This is a docker-plugin aims to send HipChat messages to a specific
+room at each docker event: start/stop/create/destroy ...
 
 ## Configuration
 
@@ -30,8 +30,7 @@ Installing and enabling the hipchat plugin
 ```
 docker run -it --rm \
   -e DEBUG=1 \
-  -e "INSTALL=https://github.com/lalyos/docker-plugin-hipchat.git" \
-  -e "ENABLE=docker-plugin-hipchat" \
+  -e "ENABLE=hipchat" \
   -e "HIPCHAT_TOKEN=$HIPCHAT_TOKEN" \
   -e "HIPCHAT_ROOM_ID=$HIPCHAT_ROOM_ID" \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -86,14 +85,15 @@ checking the jq filter in isolation
 
 ## Hacking
 
-To be able to test without pushing changes to github, use volumes.
+To be able to test without commiting/pushing changes to github, use volumes.
+
 ```
 docker run -it --rm \
   -e DEBUG=1 \
-  -e "ENABLE=docker-plugin-hipchat" \
+  -e "ENABLE=hipchat" \
   -e "HIPCHAT_TOKEN=$HIPCHAT_TOKEN" \
   -e "HIPCHAT_ROOM_ID=$HIPCHAT_ROOM_ID" \
-  -v $(pwd):/plugins/available/docker-plugin-hipchat \
+  -v $(pwd):/plugins/available/hipchat \
   -v /var/run/docker.sock:/var/run/docker.sock \
   progrium/plugins
 ```
