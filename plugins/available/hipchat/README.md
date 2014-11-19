@@ -73,7 +73,7 @@ docker run -it --rm \
 
 It will generate a similar hipchat message:
 ```
-Container: exists Name=/cadvisor Image=google/cadvisor:latest IPAddress=172.19.0.4 Path=/usr/bin/cadvisor
+Container: exists Name=/cadvisor Image=google/cadvisor:latest Path=/usr/bin/cadvisor
 ```
 
 ## Unit testing the jq filter
