@@ -100,5 +100,5 @@ docker run -it --rm \
 
 checking the jq filter with plugn configuration applied
 ```
-eval $(plugn config export hipchat) && ./filter_test
+eval $(PLUGIN_PATH=./plugins plugn config export hipchat) && ./filter_test
 ```
